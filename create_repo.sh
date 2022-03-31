@@ -15,8 +15,9 @@ read c
 echo "your favorite fruit is $c"
 sleep 2
 
-echo "now will creat for your a bucket named $a-$b-$c"
 var=$a-$b-$c
+echo "now will creat for your a bucket named $var"
+
 
 ### check if this bucket allready exist or if it is successfully created
 
@@ -36,6 +37,6 @@ else
 
    else
      echo "Your bucket isn't successfully created, your need to change at least one of your previous input"
-  bash create_repo.sh
+     bash create_repo.sh
     fi
 fi

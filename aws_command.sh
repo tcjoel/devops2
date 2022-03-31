@@ -15,6 +15,11 @@ echo "Let's see your different volumes"
 sleep 3
 aws ec2 describe-volumes
 
+echo "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+echo "Let's see your different ec2 instances"
+sleep 3
+aws ec2 describe-instances
+
 echo "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 echo "Let's see your different key-pairs"
 sleep 3

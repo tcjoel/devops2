@@ -9,33 +9,28 @@ echo " 1- Bucket names must be between 3 (min) and 63 (max) characters long."
 echo " 2- Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-)."
 echo " 3- Bucket names must begin and end with a letter or number"
 sleep 3
+echo " enter a s3_bucket_name:"
+read name
+var=$name-$RANDOM
 
-# echo " enter a s3_bucket_name:"
-# read name
-
-echo "create on s3 bucket named joel-fecafoot follow by a random number"
-var=joel-fecafoot-$RANDOM
-
-echo " now let's create s3 bucket named $var"
+echo " now let's create s3 bucket named $name"
 
 #### check if this bucket already exist or created 
 
-BUCKET_EXISTS=$(aws s3api head-bucket --bucket $var 2>&1 || true)
+BUCKET_EXISTS=$(aws s3api head-bucket --bucket $name 2>&1 || true)
 if [ -z "$BUCKET_EXISTS" ]; then 
   echo "This bucket exist already "
-  sleep 1
-  echo "let's create an other one"
-  bash test.sh
+  create_repo2.sh
 else 
-   aws s3api create-bucket --bucket $var
+   aws s3api create-bucket --bucket $name
    echo "bucket creation"  
-   BUCKET_EXISTS=$(aws s3api head-bucket --bucket $var 2>&1 || true)
+   BUCKET_EXISTS=$(aws s3api head-bucket --bucket $name 2>&1 || true)
    if [ -z "$BUCKET_EXISTS" ]; then
      echo "your bucket is successfully created"
    else 
-     echo "your bucket isn't successfully created because you didn't follow the bucket name policy "
+     echo "your bucket isn't successfully created because you didn't follow the above policies "
      sleep 3
      echo "let's try to create the bucket again"
-     bash test.sh
+     create_repo2.sh
    fi 
 fi 

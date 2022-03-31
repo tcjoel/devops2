@@ -25,7 +25,7 @@ if [ -z "$BUCKET_EXISTS" ]; then
   echo "This bucket exist already "
   sleep 1
   echo "let's create an other one"
-  bash test.sh
+  bash s3_creation.sh
 else 
    aws s3api create-bucket --bucket $var
    echo "bucket creation"  
@@ -36,6 +36,6 @@ else
      echo "your bucket isn't successfully created because you didn't follow the bucket name policy "
      sleep 3
      echo "let's try to create the bucket again"
-     bash test.sh
+     bash s3_creation.sh
    fi 
 fi 
