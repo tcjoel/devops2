@@ -1,0 +1,7 @@
+{
+    "fruit": {
+        "name" : "avocado",
+        "color" : "green",
+        "price": 3.2
+    }
+}
