@@ -1,0 +1,12 @@
+Parameters:
+  bucketName:
+    Description: bucket name of your need
+    Type: String
+Resources:
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Ref bucketName
+      VersioningConfiguration:
+        Status: Enabled
