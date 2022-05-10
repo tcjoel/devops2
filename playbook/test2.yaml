@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+    - name: check space
+      ansible.netcommon.cli_command:
+        command: df -h
