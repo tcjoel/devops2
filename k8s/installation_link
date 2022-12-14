@@ -1,0 +1,13 @@
+---
+# line two give the video and line 3 the command
+https://youtu.be/SQJxYhfzznU
+https://github.com/vb100/Deploy_Kubernetes_AWS_EC2/blob/main/README.md
+# https://devopscube.com/setup-kubernetes-cluster-kubeadm/
+
+
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.93.249:6443 --token fxkj1a.l3nw9s2def4l262v \ --discovery-token-ca-cert-hash sha256:f7945e1cb8fae4538db6d00f188a546ba5a3fac85217154b4eb7b8f459aea55e

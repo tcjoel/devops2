@@ -1,8 +1,16 @@
+# ---
+# - hosts: all
+#   become: true
+#   tasks:
+
+#     - name: check space
+#       ansible.netcommon.cli_command:
+#         command: df -h
 ---
 - hosts: all
-  become: true
+  gather_facts: no
   tasks:
+    - shell: df -h
+      register: ps
 
-    - name: check space
-      ansible.netcommon.cli_command:
-        command: df -h
+    - debug: var=ps.stdout_lines
