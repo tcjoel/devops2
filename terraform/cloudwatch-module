@@ -1,0 +1,87 @@
+####### main.tf
+resource "aws_cloudwatch_metric_alarm" "cloudwatch_alarms" {
+  count = length(var.alarms)
+
+  alarm_name          = var.alarms[count.index]["name"]
+  comparison_operator = var.alarms[count.index]["comparison_operator"]
+  evaluation_periods  = var.alarms[count.index]["evaluation_periods"]
+  metric_name         = var.alarms[count.index]["metric_name"]
+  namespace           = var.alarms[count.index]["namespace"]
+  period              = var.alarms[count.index]["period"]
+  statistic           = var.alarms[count.index]["statistic"]
+  threshold           = var.alarms[count.index]["threshold"]
+
+  dimensions = var.alarms[count.index]["dimensions"]
+
+  alarm_description = var.alarms[count.index]["description"]
+  alarm_actions     = var.alarms[count.index]["actions"]
+
+  tags = var.alarms[count.index]["tags"]
+}
+
+######### variables.tf
+variable "alarms" {
+  type = list(object({
+    name                = string
+    comparison_operator = string
+    evaluation_periods  = number
+    metric_name         = string
+    namespace           = string
+    period              = number
+    statistic           = string
+    threshold           = number
+    dimensions          = map(string)
+    description         = string
+    actions             = list(string)
+    tags                = map(string)
+  }))
+}
+
+
+######### Example Usage
+module "cloudwatch_alarms" {
+  source = "./cloudwatch_alarms"
+
+  alarms = [
+    {
+      name                = "CPUUtilizationAlarm"
+      comparison_operator = "GreaterThanOrEqualToThreshold"
+      evaluation_periods  = 2
+      metric_name         = "CPUUtilization"
+      namespace           = "AWS/EC2"
+      period              = 300
+      statistic           = "Average"
+      threshold           = 80
+      dimensions = {
+        InstanceId = "i-1234567890abcdef0"
+      }
+      description = "Alarm for CPU utilization exceeding 80%"
+      actions     = ["arn:aws:sns:us-west-2:123456789012:my-sns-topic"]
+      tags        = {
+        Environment = "Production"
+      }
+    },
+    {
+      name                = "MemoryUtilizationAlarm"
+      comparison_operator = "GreaterThanOrEqualToThreshold"
+      evaluation_periods  = 2
+      metric_name         = "MemoryUtilization"
+      namespace           = "System/Linux"
+      period              = 300
+      statistic           = "Average"
+      threshold           = 70
+      dimensions = {
+        InstanceId = "i-1234567890abcdef0"
+      }
+      description = "Alarm for Memory utilization exceeding 70%"
+      actions     = ["arn:aws:sns:us-west-2:123456789012:my-sns-topic"]
+      tags        = {
+        Environment = "Production"
+      }
+    }
+  ]
+}
+
+
+
+
