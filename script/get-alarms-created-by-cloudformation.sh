@@ -1,5 +1,6 @@
 # Get a list of CloudWatch alarms
 alarms=$(aws cloudwatch describe-alarms --query "MetricAlarms[*].[AlarmName, AlarmArn]" --output text)
+# aws cloudformation describe-stack-resources --stack-name <your-stack-name> | jq -r '.StackResources[] | select(.ResourceType == "AWS::CloudWatch::Alarm") | .PhysicalResourceId'
 
 # Iterate through each alarm
 for alarm in $alarms; do
